@@ -1,0 +1,77 @@
+#btn-criar-campeonato {
+	background-color: white;
+	color: black;
+}
+
+body{
+	text-align: center;
+}
+.time{
+	floa: center;
+	display : inline-block;
+	position: relative;
+	height: 50px;
+	width: auto;
+	min-width: 100px;
+	padding-right: 10px;
+	overflow: hidden;
+	background-color: #1d47d3;
+	color: white;
+	border-radius: 8px;
+	margin: 2px;
+	cursor: pointer;
+	/*border: 5px #1d47d3 solid;*/
+}
+
+.time span {
+	display: inline-block;
+}
+.time-selected{
+	/*border: 5px #4f78ff solid;*/
+	background-color: darkseagreen;
+}
+
+.time .badge {
+	position: absolute;
+	top:0;
+	right: 0;
+	background-color: transparent;
+	display: none;
+}
+
+.time .badge-selected {
+	display: block;
+}
+.escudo-time{
+	height: 100%;
+	top:0;
+	left: 0;
+	position: absolute;
+	display: inline-block;
+	max-width: 50px;
+	overflow: hidden;
+}
+
+.escudo-time img{
+	position: relative;
+	padding: 5%;
+	height: 95%;
+}
+
+.nome-time{
+	position: relative;
+	height: 100%;
+	margin: 0 auto;
+	padding: 5px;
+	margin-left: 60px;
+	width: auto;
+	font-size: 150%;
+	font-family: 'Lato', sans-serif;
+	line-height: 40px;
+
+}
+
+datalist::calendar-picker-indicator {
+  display: none;
+}
+
