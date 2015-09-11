@@ -5,7 +5,7 @@ var Time = function(id,nome,sigla,liga){
 	this.liga = liga;	
 }
 
-var jogadores = ['Gustavo Coelho', 'Felipe de Paula', 'Gustavo Simoes', 'José Marcelo', 'Guilherme Vona'];
+var jogadores = ['Gustavo Coelho', 'Felipe de Paula', 'Gustavo Simoes', 'José Marcelo', 'Guilherme Vona', 'Miguel Fernandez'];
 
 var ligas = ['Brasil','Alemanha','Espanha','Italia','Inglaterra','França','Portugal'];
 var times = [];
@@ -51,7 +51,7 @@ $(document).ready(function(){
         }
         
         if(timesEscolhidos.length > 0){
-            console.log('------------------------------');
+            console.log(' ');
             for(i = 0;i < timesEscolhidos.length;i++){
             console.log(timesEscolhidos[i].nome);
 	        }
@@ -62,18 +62,19 @@ $(document).ready(function(){
         //console.log(String.fromCharCode(e.keyCode));
         
         var texto = $(this).val().toUpperCase();
-        
-		var isInSelect = [];
+		
+		var options = '';
+		
+        $('datalist').empty();
         if(texto != ""){
         for(i = 0;i < jogadores.length;i++){
             if(jogadores[i].toUpperCase().indexOf(texto) == 0 ){
                 console.log(jogadores[i]);
-				
-				
-				isInSelect.push(jogadores[i]);
-				$('datalist').append('<option value="'+jogadores[i]+'">'+jogadores[i]+'</option>');
+				options += '<option value="'+jogadores[i]+'">'+jogadores[i]+'</option>'
             } 
 		}
+			
+				$('datalist').append(options);
 	}
         
     });
