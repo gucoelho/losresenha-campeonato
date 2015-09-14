@@ -1,4 +1,4 @@
-var Time = function (id, nome, sigla, liga) {
+﻿var Time = function (id, nome, sigla, liga) {
     this.id = id;
     this.nome = nome;
     this.sigla = sigla;
@@ -59,7 +59,7 @@ times.push(new Time(2, 'Real Madrid', 'REA', ligas[2]));
 times.push(new Time(3, 'Atlético de Madrid', 'ATM', ligas[2]));
 times.push(new Time(4, 'Bayern de Munique', 'BAY', ligas[1]));
 times.push(new Time(5, 'PSG', 'PSG', ligas[5]));
-times.push(new Time(6, 'Juventos', 'JUV', ligas[3]));
+times.push(new Time(6, 'Juventus', 'JUV', ligas[3]));
 times.push(new Time(7, 'Roma', 'ROM', ligas[3]));
 times.push(new Time(8, 'Chelsea', 'CHE', ligas[4]));
 times.push(new Time(9, 'Manchester United', 'MAU', ligas[4]));
