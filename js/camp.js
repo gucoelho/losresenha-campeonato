@@ -1,8 +1,10 @@
-﻿var Time = function (id, nome, sigla, liga) {
+var Time = function (id, nome, sigla, liga, cor1, cor2) {
     this.id = id;
     this.nome = nome;
     this.sigla = sigla;
     this.liga = liga;
+	this.cor1 = cor1;
+	this.cor2 = cor2;
 }
 
 var Jogador = function (id, nome, sobrenome, apelido) {
@@ -31,6 +33,26 @@ function getRandomInt(min, max) {
     return Math.round(Math.random() * (max - min + 1)) + min;
 }
 
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 var jogadores = [];
 jogadores.push(new Jogador(1, 'Gustavo', 'Coelho', 'Coelho'));
 jogadores.push(new Jogador(2, 'Gustavo', 'Simões', 'Sima'));
@@ -54,17 +76,17 @@ var ligas = ['Brasil', 'Alemanha', 'Espanha', 'Italia', 'Inglaterra', 'França',
 
 var times = [];
 
-times.push(new Time(1, 'Barcelona', 'BAR', ligas[2]));
-times.push(new Time(2, 'Real Madrid', 'REA', ligas[2]));
-times.push(new Time(3, 'Atlético de Madrid', 'ATM', ligas[2]));
-times.push(new Time(4, 'Bayern de Munique', 'BAY', ligas[1]));
-times.push(new Time(5, 'PSG', 'PSG', ligas[5]));
-times.push(new Time(6, 'Juventus', 'JUV', ligas[3]));
-times.push(new Time(7, 'Roma', 'ROM', ligas[3]));
-times.push(new Time(8, 'Chelsea', 'CHE', ligas[4]));
-times.push(new Time(9, 'Manchester United', 'MAU', ligas[4]));
-times.push(new Time(10, 'Manchester City', 'MAC', ligas[4]));
-times.push(new Time(11, 'Borussia Bortmund', 'BOR', ligas[1]));
+times.push(new Time(1, 'Barcelona', 'BAR', ligas[2],'#a93b63','#0076b6'));
+times.push(new Time(2, 'Real Madrid', 'REA', ligas[2],'#fefefe','#f6b90c'));
+times.push(new Time(3, 'Atlético de Madrid', 'ATM', ligas[2],'#152881', '#e12017'));
+times.push(new Time(4, 'Bayern de Munique', 'BAY', ligas[1],'#dc184f','#0057a4'));
+times.push(new Time(5, 'PSG', 'PSG', ligas[5],'#015293','#e52b38'));
+times.push(new Time(6, 'Juventus', 'JUV', ligas[3],'#1e1916','#ffffff'));
+times.push(new Time(7, 'Roma', 'ROM', ligas[3],'#1e1916','#b30838'));
+times.push(new Time(8, 'Chelsea', 'CHE', ligas[4],'#034694','#ffffff'));
+times.push(new Time(9, 'Manchester United', 'MAU', ligas[4], '#ffff00','#ff0000'));
+times.push(new Time(10, 'Manchester City', 'MAC', ligas[4],'#00b4db','#ffffff'));
+times.push(new Time(11, 'Borussia Bortmund', 'BOR', ligas[1],'#f8dd37','#000000'));
 
 function getTimeById(id) {
     for (i = 0; i < times.length; i++) {
@@ -163,12 +185,12 @@ var sorteioJogadores;
         
         if (sorteioTimes.length > sorteioJogadores.length) {
             for (i = 0; i < sorteioJogadores.length; i=i) {
-            sorteioTimes.sort();
-            sorteioJogadores.sort();
+            shuffle(sorteioTimes);
+			shuffle(sorteioJogadores);
             sorteioFinal.push(new Sorteio(sorteioTimes[i],sorteioJogadores[i]));
              
            // console.log(sorteioFinal[i].time.nome +'-'+sorteioFinal[i].jogador.apelido);
-
+			
                 
             sorteioJogadores.shift(sorteioJogadores[i]);
             sorteioTimes.shift(sorteioTimes[i]);
@@ -177,13 +199,13 @@ var sorteioJogadores;
         }else {
             
         while(sorteioTimes.length != sorteioJogadores.length){
-            sorteioTimes.push(getRandomInt(0,sorteioTimes.length));
+            sorteioTimes.push(sorteioTimes[getRandomInt(0,sorteioTimes.length)]);
         }
             
          for (i = 0; i < sorteioTimes.length;i=i) {
             //var sort = Math.round(Math.random);
-            sorteioTimes.sort();
-            sorteioJogadores.sort();
+            shuffle(sorteioTimes);
+			shuffle(sorteioJogadores);
             sorteioFinal.push(new Sorteio(sorteioTimes[i],sorteioJogadores[i]));
              
             //console.log(sorteioFinal[i].time.nome +'-'+sorteioFinal[i].jogador.apelido);
@@ -209,13 +231,13 @@ var sorteioJogadores;
         }*/
 
             for (i = 0; i < sorteioFinal.length; i++) {
-                $('#sSorteados').append('<div class="sorteado"><div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/'+sorteioFinal[i].time.sigla+'.png"><img class="imgJogador" src="./img/fotos/perfil/'+sorteioFinal[i].jogador.apelido.toLowerCase()+'.jpg"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid red;border-top: 300px solid black;"></div></div><div class="divTextSort"><p>'+sorteioFinal[i].jogador.nomecompleto+'</p><p>'+sorteioFinal[i].time.nome+'</p></div></div>');
+                $('#sSorteados').append('<div class="sorteado"><div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/'+sorteioFinal[i].time.sigla+'.png"><img class="imgJogador" src="./img/fotos/perfil/'+sorteioFinal[i].jogador.apelido.toLowerCase()+'.jpg"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid '+sorteioFinal[i].time.cor1+';border-top: 300px solid '+sorteioFinal[i].time.cor2+';"></div></div><div class="divTextSort"><p>'+sorteioFinal[i].jogador.nomecompleto+'</p><p>'+sorteioFinal[i].time.nome+'</p></div></div>');
                 
                 
             }
     });
 
-    
+
 
 
 
