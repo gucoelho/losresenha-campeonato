@@ -115,6 +115,11 @@ function tagPlayer(jogador) {
 
 
 $(document).ready(function () {
+    
+    //$('.card').flip({
+	//	trigger: 'click'
+	//});
+    
     for (i = 0; i < times.length; i++) {
         $('#sTimes').append(tagTeam(times[i]));
     }
@@ -170,6 +175,7 @@ var sorteioTimes;
 var sorteioJogadores;
     
     $('#btnSortear').click(function () {
+        $('#sSorteados').empty();
         sorteioTimes = [];
         sorteioJogadores = [];
         sorteioFinal = [];
@@ -217,35 +223,30 @@ var sorteioJogadores;
         } 
         
         
-       /*else if (sorteioTimes.length < sorteioJogadores.length) {
-            for (i = 0; i < sorteioJogadores.length; i++) {
-                var sort = getRandomInt(0,(sorteioJogadores.length));
-                
-                sorteioTimes.sort();
-                sorteioJogadores.sort();
-                
-                sorteioFinal.push(new Sorteio(sorteioTimes[i],sorteioJogadores[sort]));
-                sorteioJogadores.pop(sorteioJogadores[sort]);
-            }
-
-        }*/
-		
-		
-		
-		
 		
 		
 
             for (i = 0; i < sorteioFinal.length; i++) {
-				$('#sSorteados').append('<div class="sorteado"><div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/'+sorteioFinal[i].time.sigla+'.png"><img class="imgJogador" src="./img/fotos/perfil/'+sorteioFinal[i].jogador.apelido.toLowerCase()+'.jpg"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid '+sorteioFinal[i].time.cor1+';border-top: 300px solid '+sorteioFinal[i].time.cor2+';"></div></div><div class="divTextSort"><p>'+sorteioFinal[i].jogador.nomecompleto+'</p><p>'+sorteioFinal[i].time.nome+'</p></div></div>');
+                
+               var tag='<div class="card"><div="sorteado">	 <div class="front"><img height="150"src="img/UEFA_Champions_League_logo_2.png"><p>RESENHA LEAGUE</p></div><div class="back"> <div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/MIL.png"><img class="imgJogador" src="./img/fotos/nobg/coelho.png"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid red;border-top: 300px solid black;"></div></div><div class="divTextSort"><p>Gustavo Coelho</p><p>AC Milan</p></div></div></div></div>';               
+                
+                
+				$('#sSorteados').append(tag);
+            
                 
             }
+    
     });
+    
+    
 
-
-	$('.card').flip({
-		trigger: 'click'
-	});
+            $('.card').flip({ trigger : 'manual'});
+    
+            $('.card').click(function () {
+                $(this).flip(true);
+            });
+       
+    
 
 
 
