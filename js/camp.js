@@ -82,7 +82,7 @@ times.push(new Time(3, 'Atlético de Madrid', 'ATM', ligas[2],'#152881', '#e1201
 times.push(new Time(4, 'Bayern de Munique', 'BAY', ligas[1],'#dc184f','#0057a4'));
 times.push(new Time(5, 'PSG', 'PSG', ligas[5],'#015293','#e52b38'));
 times.push(new Time(6, 'Juventus', 'JUV', ligas[3],'#1e1916','#ffffff'));
-times.push(new Time(7, 'Roma', 'ROM', ligas[3],'#1e1916','#b30838'));
+times.push(new Time(7, 'Roma', 'ROM', ligas[3],'#f89728','#b30838'));
 times.push(new Time(8, 'Chelsea', 'CHE', ligas[4],'#034694','#ffffff'));
 times.push(new Time(9, 'Manchester United', 'MAU', ligas[4], '#ffff00','#ff0000'));
 times.push(new Time(10, 'Manchester City', 'MAC', ligas[4],'#00b4db','#ffffff'));
@@ -229,16 +229,23 @@ var sorteioJogadores;
             }
 
         }*/
+		
+		
+		
+		
+		
+		
 
             for (i = 0; i < sorteioFinal.length; i++) {
-                $('#sSorteados').append('<div class="sorteado"><div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/'+sorteioFinal[i].time.sigla+'.png"><img class="imgJogador" src="./img/fotos/perfil/'+sorteioFinal[i].jogador.apelido.toLowerCase()+'.jpg"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid '+sorteioFinal[i].time.cor1+';border-top: 300px solid '+sorteioFinal[i].time.cor2+';"></div></div><div class="divTextSort"><p>'+sorteioFinal[i].jogador.nomecompleto+'</p><p>'+sorteioFinal[i].time.nome+'</p></div></div>');
-                
+				$('#sSorteados').append('<div class="sorteado"><div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/'+sorteioFinal[i].time.sigla+'.png"><img class="imgJogador" src="./img/fotos/perfil/'+sorteioFinal[i].jogador.apelido.toLowerCase()+'.jpg"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid '+sorteioFinal[i].time.cor1+';border-top: 300px solid '+sorteioFinal[i].time.cor2+';"></div></div><div class="divTextSort"><p>'+sorteioFinal[i].jogador.nomecompleto+'</p><p>'+sorteioFinal[i].time.nome+'</p></div></div>');
                 
             }
     });
 
 
-
+	$('.card').flip({
+		trigger: 'click'
+	});
 
 
 

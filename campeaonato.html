@@ -2,17 +2,18 @@
 <html>
 
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="./bootstrap-3.3.5-dist/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="./css/camp.css">
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
-    <script src="./js/jquery-2.1.4.min.js"></script>
-    <script src="./js/camp.js"></script>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="./bootstrap-3.3.5-dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="./css/camp.css">
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
+	<script src="./js/jquery-2.1.4.min.js"></script>
+	<script src="./js/camp.js"></script>
+	<script src="./js/jquery.flip.min.js"></script>
 </head>
 
 <body>
-    <img width="300" src="./img/UEFA_Champions_League_logo_2.png">
-    <h1>RESENHA LEAGUE</h2>
+	<img width="300" src="./img/UEFA_Champions_League_logo_2.png">
+	<h1>RESENHA LEAGUE</h2>
 		<!--<div class="time">
 			<div class ="escudo-time">
 			<img src="http://s.glbimg.com/es/sde/f/equipes/2013/09/16/milan_60x60.png" />
@@ -31,8 +32,11 @@
     </section>
     <button id="btnSortear" class="btn">Sortear times</button>
     <section id="sSorteados"></section>
+	
+	<div class="card">
     <div class="sorteado">
-        <div class="sorteadoImg">
+	  <div class="front"> 
+    	<div class="sorteadoImg">
             <img class="imgEscudo" src="./img/escudos/medio/MIL.png">
             <img class="imgJogador" src="./img/fotos/nobg/coelho.png">
             <div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid red;border-top: 300px solid black;"></div>
@@ -41,6 +45,12 @@
             <p>Gustavo Coelho</p>
             <p>AC Milan</p>
         </div>
+  		</div> 
+  	<div class="back">
+    	<img height="150" src="img/UEFA_Champions_League_logo_2.png">
+		<p>RESENHA LEAGUE</p>
+  	</div> 
     </div>
+</div>
 </body>
 </html>
