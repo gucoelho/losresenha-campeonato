@@ -112,13 +112,19 @@ function tagPlayer(jogador) {
     return '<div class="tagJogador" jogador="' + jogador.id + '"><div class="jogImagem"><img src="img/fotos/perfil/' + jogador.apelido + '.JPG"></div><div><b>' + jogador.apelido + '</b></div><div><small>' + jogador.nomecompleto + '</small></div></div>'
 }
 
-
+function tagSorteado(sorteio) {
+    return '<div class="card"><div class="sorteado"><div class="front"><img height="150"src="img/UEFA_Champions_League_logo_2.png"><p>RESENHA LEAGUE</p></div><div class="back"> <div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/'+sorteio.time.sigla+'.png"><img class="imgJogador" src="./img/fotos/perfil/'+sorteio.jogador.apelido+'.jpg"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid '+sorteio.time.cor1+';border-top: 300px solid '+sorteio.time.cor2+';"></div></div><div class="divTextSort"><p>'+sorteio.jogador.nome+'</p><p>'+sorteio.time.nome+'</p></div></div></div></div>';             
+}
 
 $(document).ready(function () {
     
     //$('.card').flip({
 	//	trigger: 'click'
 	//});
+    
+    $('.card').click( function(){
+        alert('dsd');
+    });
     
     for (i = 0; i < times.length; i++) {
         $('#sTimes').append(tagTeam(times[i]));
@@ -225,27 +231,22 @@ var sorteioJogadores;
         
 		
 		
-
+        
             for (i = 0; i < sorteioFinal.length; i++) {
-                
-               var tag='<div class="card"><div="sorteado">	 <div class="front"><img height="150"src="img/UEFA_Champions_League_logo_2.png"><p>RESENHA LEAGUE</p></div><div class="back"> <div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/MIL.png"><img class="imgJogador" src="./img/fotos/nobg/coelho.png"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid red;border-top: 300px solid black;"></div></div><div class="divTextSort"><p>Gustavo Coelho</p><p>AC Milan</p></div></div></div></div>';               
-                
-                
-				$('#sSorteados').append(tag);
+        
+              /* var tag='<div class="card"><div class="sorteado"><div class="front"><img height="150"src="img/UEFA_Champions_League_logo_2.png"><p>RESENHA LEAGUE</p></div><div class="back"> <div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/'+sorteioFinal[i].time.sigla+'.png"><img class="imgJogador" src="./img/fotos/perfil/'+sorteioFinal[i].jogador.apelido+'.jpg"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid '+sorteioFinal[i].time.cor1+';border-top: 300px solid '+sorteioFinal[i].time.cor2+';"></div></div><div class="divTextSort"><p>'+sorteioFinal[i].jogador.nome+'</p><p>'+sorteioFinal[i].time.nome+'</p></div></div></div></div>';          */     
+                $('#sSorteados').append(tagSorteado(sorteioFinal[i]));
             
-                
             }
-    
-    });
-    
-    
+        
+        $('.card').click( function(){
+            $(this).flip();
+        });
 
-            $('.card').flip({ trigger : 'manual'});
+    });
+                  //  $(".card").flip({ trigger : 'click'});
+
     
-            $('.card').click(function () {
-                $(this).flip(true);
-            });
-       
     
 
 
