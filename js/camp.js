@@ -30,7 +30,7 @@ function formatTagOptions(options) {
 }
 
 function getRandomInt(min, max) {
-    return Math.round(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (max - min) + min);
 }
 
 
@@ -176,11 +176,13 @@ $(document).ready(function () {
             }
         }
     });
-    
+
+var flagSorteio = false;
 var sorteioTimes;
 var sorteioJogadores;
     
     $('#btnSortear').click(function () {
+        flagSorteio = true;
         $('#sSorteados').empty();
         sorteioTimes = [];
         sorteioJogadores = [];
@@ -211,7 +213,7 @@ var sorteioJogadores;
         }else {
             
         while(sorteioTimes.length != sorteioJogadores.length){
-            sorteioTimes.push(sorteioTimes[getRandomInt(0,sorteioTimes.length)]);
+            sorteioTimes.push(sorteioTimes[(getRandomInt(1,sorteioTimes.length) - 1)]);
         }
             
          for (i = 0; i < sorteioTimes.length;i=i) {
@@ -235,21 +237,80 @@ var sorteioJogadores;
             for (i = 0; i < sorteioFinal.length; i++) {
         
               /* var tag='<div class="card"><div class="sorteado"><div class="front"><img height="150"src="img/UEFA_Champions_League_logo_2.png"><p>RESENHA LEAGUE</p></div><div class="back"> <div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/'+sorteioFinal[i].time.sigla+'.png"><img class="imgJogador" src="./img/fotos/perfil/'+sorteioFinal[i].jogador.apelido+'.jpg"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid '+sorteioFinal[i].time.cor1+';border-top: 300px solid '+sorteioFinal[i].time.cor2+';"></div></div><div class="divTextSort"><p>'+sorteioFinal[i].jogador.nome+'</p><p>'+sorteioFinal[i].time.nome+'</p></div></div></div></div>';          */     
-                $('#sSorteados').append(tagSorteado(sorteioFinal[i]));
+                $('#sSorteados').prepend(tagSorteado(sorteioFinal[i]));
             
             }
         
-        $('.card').click( function(){
-            $(this).flip();
+            $('.card').flip({
+               speed : 900,
+               trigger : 'manual'
+           });
+        
+      //  var $cards = $('.card').all;
+        
+       // setInterval(function(){
+       //     for(h=0;h<$cards.length;h++){  $cards[h].flip(true); }
+       // } ,100);
+                
+        var time = 2000;
+        
+        
+        $('.card').each(function() {
+            
+           var cardTag = $(this);
+            
+            
+            setTimeout(function(){
+                cardTag.flip(true);
+                
+               // var audioElement = document.createElement('audio');
+               // audioElement.setAttribute('src', './sons/audios/Léo.mp3');
+               // audioElement.setAttribute('autoplay', 'autoplay');
+               // audioElement.play();
+                
+                
+            },time)
+            
+            time = time + 3000;
         });
+        
+        
+        if(flagSorteio){
+            
+        }
 
     });
-                  //  $(".card").flip({ trigger : 'click'});
 
+var listaJogos;
     
-    
+var Jogo = function(time1,time2){
+    this.time1 = time1;
+    this.time2 = time2;
+    this.gols1 = 0;
+    this.gols2 = 0;
+}
+   
+
+$('#btn-jogos').click(function(){
+      listaJogos = [];
+            for(i=0;i<sorteioFinal.length;i++){
+                for(j=0;j<sorteioFinal.length-1;j++){
+                    if(sorteioFinal[i] != sorteioFinal[j]){                       
+                        listaJogos.push(new Jogo(sorteioFinal[i],sorteioFinal[j]));
+                    }
+                }
+            }
 
 
+        for(i=0;i<listaJogos.length;i++){
+            var time1 = listaJogos[i].time1.time.nome;
+            var time2 = listaJogos[i].time2.time.nome;
+            var jogador1 = listaJogos[i].time1.jogador.apelido;
+            var jogador2 = listaJogos[i].time2.jogador.apelido;
+            
+            console.log('('+time1+')' + jogador1 + ' x ' + jogador2+'('+time2+')');
+            }
+});
 
 
 
