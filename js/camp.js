@@ -115,12 +115,36 @@ function tagPlayer(jogador) {
 function tagSorteado(sorteio) {
     return '<div class="card"><div class="sorteado"><div class="front"><img height="150"src="img/UEFA_Champions_League_logo_2.png"><p>RESENHA LEAGUE</p></div><div class="back"> <div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/'+sorteio.time.sigla+'.png"><img class="imgJogador" src="./img/fotos/perfil/'+sorteio.jogador.apelido+'.jpg"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid '+sorteio.time.cor1+';border-top: 300px solid '+sorteio.time.cor2+';"></div></div><div class="divTextSort"><p>'+sorteio.jogador.nome+'</p><p>'+sorteio.time.nome+'</p></div></div></div></div>';             
 }
+    
+var Jogo = function(time1,time2){
+    this.idJogo = undefined;
+    this.time1 = time1;
+    this.time2 = time2;
+    this.gols1 = 0;
+    this.gols2 = 0;
+    this.rodada = 0;
+}
+   
+function containsSorteio(sorteio, sorteioLista){
+    for(var i = 0; i < sorteioLista.length; i++) {
+        if  (sorteioLista[i] == sorteio) {
+            return true;
+        }
+    }
+    return false;
+}
 
 $(document).ready(function () {
     
     //$('.card').flip({
 	//	trigger: 'click'
 	//});
+    
+var flagSorteio = false;
+var sorteioTimes;
+var sorteioJogadores;
+var listaJogos;
+var sorteioFinal;
     
     $('.card').click( function(){
         alert('dsd');
@@ -157,7 +181,6 @@ $(document).ready(function () {
     });
 
 
-    var sorteioFinal;
 
     $('.time').click(function () {
         $(this).toggleClass('time-selected');
@@ -177,10 +200,7 @@ $(document).ready(function () {
         }
     });
 
-var flagSorteio = false;
-var sorteioTimes;
-var sorteioJogadores;
-    
+
     $('#btnSortear').click(function () {
         flagSorteio = true;
         $('#sSorteados').empty();
@@ -281,35 +301,47 @@ var sorteioJogadores;
 
     });
 
-var listaJogos;
-    
-var Jogo = function(time1,time2){
-    this.time1 = time1;
-    this.time2 = time2;
-    this.gols1 = 0;
-    this.gols2 = 0;
-}
-   
 
 $('#btn-jogos').click(function(){
       listaJogos = [];
+      var listaJogadoresJaDefinidos = [];
             for(i=0;i<sorteioFinal.length;i++){
-                for(j=0;j<sorteioFinal.length-1;j++){
-                    if(sorteioFinal[i] != sorteioFinal[j]){                       
+                for(j=0;j<sorteioFinal.length;j++){
+                    if(sorteioFinal[i] != sorteioFinal[j] && !containsSorteio(sorteioFinal[j], listaJogadoresJaDefinidos)){         
                         listaJogos.push(new Jogo(sorteioFinal[i],sorteioFinal[j]));
                     }
                 }
+                listaJogadoresJaDefinidos.push(sorteioFinal[i]);
             }
 
-
+    
+    
+    
+    var qtdRodada = sorteioFinal.length-1;
+    var rodada = 1;
+    var count = 1;
         for(i=0;i<listaJogos.length;i++){
+            
+            listaJogos[i].rodada = rodada;
+            if(rodada == qtdRodada){
+                rodada = 1 + count;
+                count ++;
+            } else { rodada++ } 
+            
+            
+            
             var time1 = listaJogos[i].time1.time.nome;
             var time2 = listaJogos[i].time2.time.nome;
             var jogador1 = listaJogos[i].time1.jogador.apelido;
             var jogador2 = listaJogos[i].time2.jogador.apelido;
             
-            console.log('('+time1+')' + jogador1 + ' x ' + jogador2+'('+time2+')');
-            }
+            
+            
+            console.log('('+time1+')' + jogador1 + ' x ' + jogador2+'('+time2+') rodada:' + listaJogos[i].rodada);
+        }
+    
+    
+        for(){}
 });
 
 
