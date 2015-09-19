@@ -308,8 +308,12 @@ $(document).ready(function () {
 	      var listaJogadoresJaDefinidos = [];
 	            for(i=0;i<sorteioFinal.length;i++){
 	                for(j=0;j<sorteioFinal.length;j++){
-	                    if(sorteioFinal[i] != sorteioFinal[j] && !containsSorteio(sorteioFinal[j], listaJogadoresJaDefinidos)){         
+	                    if(sorteioFinal[i] != sorteioFinal[j] && !containsSorteio(sorteioFinal[j], listaJogadoresJaDefinidos)){
+                            if((Math.random()*10) > 5){ 
 	                        listaJogos.push(new Jogo(sorteioFinal[i],sorteioFinal[j]));
+                            } else {
+	                        listaJogos.push(new Jogo(sorteioFinal[j],sorteioFinal[i]));
+                            }
 	                    }
 	                }
 	                listaJogadoresJaDefinidos.push(sorteioFinal[i]);
@@ -323,7 +327,6 @@ $(document).ready(function () {
 	    var qtdRodada = sorteioFinal.length-1;
 	    var rodada = 1;
 	    var count = 1;
-		var jogoRodada =1;
 		
 	        for(i=0;i<listaJogos.length;i++){
 				listaJogos[i].rodada = rodada;
@@ -334,7 +337,7 @@ $(document).ready(function () {
 	            } else { rodada++ } 
 	        }
 		
-	        //listaJogos.sort(compareNumbers); 
+	       listaJogos.sort(compareNumbers); 
 		        for(i=0;i<listaJogos.length;i++){
 					      
 	            var time1 = listaJogos[i].time1.time.nome;
@@ -342,7 +345,7 @@ $(document).ready(function () {
 	            var jogador1 = listaJogos[i].time1.jogador.apelido;
 	            var jogador2 = listaJogos[i].time2.jogador.apelido;
 	        
-					console.log(jogador1 + ' x ' + jogador2)//+ '\tRODADA:' + listaJogos[i].rodada);
+					console.log(jogador1 + '\t x\t ' + jogador2 + '\tRODADA:' + listaJogos[i].rodada);
 	   //console.log('('+time1+')' + jogador1 + ' x ' + jogador2+'('+time2+') rodada:' + listaJogos[i].rodada);
 				}
 		
