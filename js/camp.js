@@ -66,10 +66,11 @@ jogadores.push(new Jogador(8, 'Pedro', 'Oliveira', 'Pedro'));
 jogadores.push(new Jogador(9, 'Rafael', 'Vieira', 'Rafa'));
 jogadores.push(new Jogador(10, 'Lucas', 'Alvarenga', 'Alva'));
 jogadores.push(new Jogador(11, 'William', 'Figueredo', 'Bahia'));
-jogadores.push(new Jogador(12, 'Vinicius', 'Freihat', 'Frei'));
+//jogadores.push(new Jogador(12, 'Vinicius', 'Freihat', 'Frei'));
 jogadores.push(new Jogador(13, 'José', 'Marcelo', 'Zé'));
 jogadores.push(new Jogador(14, 'Rafael', 'Peron', 'Cacau'));
-jogadores.push(new Jogador(15, 'Matheus', 'Carvalho', 'Salva'));
+//jogadores.push(new Jogador(15, 'Matheus', 'Carvalho', 'Salva'));
+jogadores.push(new Jogador(16, 'Matheus', 'Macieira', 'Pulga'));
 
 
 
@@ -114,7 +115,7 @@ function tagPlayer(jogador) {
 }
 
 function tagSorteado(sorteio) {
-	return '<div class="card"><div class="sorteado"><div class="front"><img height="150"src="img/UEFA_Champions_League_logo_2.png"><p>RESENHA LEAGUE</p></div><div class="back"> <div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/' + sorteio.time.sigla + '.png"><img class="imgJogador" src="./img/fotos/perfil/' + sorteio.jogador.apelido + '.jpg"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid ' + sorteio.time.cor1 + ';border-top: 300px solid ' + sorteio.time.cor2 + ';"></div></div><div class="divTextSort"><p>' + sorteio.jogador.nome + '</p><p>' + sorteio.time.nome + '</p></div></div></div></div>';
+	return '<div class="card"><div class="sorteado"><div class="front"><img height="150"src="img/UEFA_Champions_League_logo_2.png"><p>RESENHA LEAGUE</p></div><div class="back"> <div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/' + sorteio.time.sigla + '.png"><img class="imgJogador" src="./img/fotos/nobg/' + sorteio.jogador.apelido + '.png"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid ' + sorteio.time.cor1 + ';border-top: 300px solid ' + sorteio.time.cor2 + ';"></div></div><div class="divTextSort"><p>' + sorteio.jogador.nome + '</p><p>' + sorteio.time.nome + '</p></div></div></div></div>';
 }
 
 var Jogo = function (time1, time2) {
@@ -338,7 +339,9 @@ $(document).ready(function () {
 	        }
 		
 	       listaJogos.sort(compareNumbers); 
-		        for(i=0;i<listaJogos.length;i++){
+            
+        
+            /*for(i=0;i<listaJogos.length;i++){
 					      
 	            var time1 = listaJogos[i].time1.time.nome;
 	            var time2 = listaJogos[i].time2.time.nome;
@@ -348,43 +351,74 @@ $(document).ready(function () {
 					console.log(jogador1 + '\t x\t ' + jogador2 + '\tRODADA:' + listaJogos[i].rodada);
 	   //console.log('('+time1+')' + jogador1 + ' x ' + jogador2+'('+time2+') rodada:' + listaJogos[i].rodada);
 				}
-		
-		
+                    */
+var participantes = [];
+        
+    for(i=0;i<sorteioFinal.length;i++){
+        participantes.push(new Participante(sorteioFinal[i]));
+    }       
+        
+var table = document.createElement("TABLE");
+var header = table.createTHead();
+var row = header.insertRow(0);
+var cell = row.insertCell(0);
+cell.innerHTML = 'Jogador';
+cell = row.insertCell(1);
+cell.innerHTML = 'Time';
+cell = row.insertCell(2);
+cell.innerHTML = 'JGS';
+cell = row.insertCell(3);
+cell.innerHTML = 'PTS';
+cell = row.insertCell(4);
+cell.innerHTML = 'V';
+cell = row.insertCell(5);
+cell.innerHTML = 'E';
+cell = row.insertCell(6);
+cell.innerHTML = 'D';
+//var header = table.createTHead();
+    for(i=0;i<participantes.length;i++){
+    var row = table.insertRow(i);
+        
+    for(j=0;j<7;j++){
+        var cell = row.insertCell(j);
+        switch(j){
+            case 0:  cell.innerHTML = participantes[i].jogador.apelido; break;
+            case 1:  cell.innerHTML = participantes[i].time.nome; break;
+            case 2:  cell.innerHTML = participantes[i].jogos; break;
+            case 3:  cell.innerHTML = participantes[i].pontos; break;
+            case 4:  cell.innerHTML = participantes[i].vitorias; break;
+            case 5:  cell.innerHTML = participantes[i].empates; break;
+            case 6:  cell.innerHTML = participantes[i].derrotas; break;
+        }
+    }    
+
+    }
+
+       $('#sCampeonato').empty();
+       $('#sCampeonato').append(table);
+        
+        
+        
+        
+        
 	});
 	
-	/*$('#btn-jogos').click(function () {
-		var listaJogos1 = [];
-		var listaJogos2 = [];
-		var listaJogosFinal = [];
-		var qtdRodada = sorteioFinal.length - 1;
-
-		for (i = 0; i < sorteioFinal.length; i++) {
-			if (i < (sorteioFinal.length / 2)) {
-				listaJogos1.push(sorteioFinal[i]);
-			} else {
-				listaJogos2.push(sorteioFinal[i]);
-			}
-
-		}
-		
-		for (j = 0; j < qtdRodada; j++) {
-			for (i = 0; i < listaJogos1.length; i++) {
-
-				listaJogosFinal.push(new Jogo(listaJogos1[i], listaJogos2[i]));
-
-				if (i == listaJogos1.length - 1) {
-					var troca = listaJogos2[0];
-					listaJogos2.shift(troca);
-					listaJogos2.push(troca);
-				}
-			}
-		}
-		for (i = 0; i < listaJogosFinal.length; i++) {
-			for (i = 0; i < listaJogosFinal.length); i++) {
-			console.log(listaJogosFinal[i].time1.jogador.apelido + ' - ' + listaJogosFinal[i].time2.jogador.apelido);
-			}
-		}
-	});*/
-
-
 });
+
+var Participante = function(listaSorteio){
+    this.jogador = listaSorteio.jogador;
+    this.time = listaSorteio.time;
+    this.jogos = 0;
+    this.pontos = 0;
+    this.vitorias = 0;
+    this.empates = 0;
+    this.derrotas= 0;
+    this.GP = 0;
+    this.GC = 0;
+    this.SG = 0;
+}
+
+var Campeonato = function(participantes,jogos){
+    this.participantes = participantes;
+    this.jogos = jogos;
+}

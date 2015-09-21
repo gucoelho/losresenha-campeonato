@@ -207,7 +207,8 @@ h1 {
     height: 350px;
     widows: 100%;
     transform: rotate(-5deg);
-
+    -webkit-backface-visibility: hidden;
+    outline: 1px solid transparent;
 }
 
 .imgJogador{
