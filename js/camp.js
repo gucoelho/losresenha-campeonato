@@ -169,26 +169,28 @@ $(document).ready(function () {
 		//     for(h=0;h<$cards.length;h++){  $cards[h].flip(true); }
 		// } ,100);
 
-		var time = 2000;
+		var time = 3000;
 
 
 		$('.card').each(function () {
 
 			var cardTag = $(this);
-
+            var sorteado = getJogadorById($(this).attr('sorteado'));
 
 			setTimeout(function () {
 				cardTag.flip(true);
-
-				// var audioElement = document.createElement('audio');
-				// audioElement.setAttribute('src', './sons/audios/Léo.mp3');
-				// audioElement.setAttribute('autoplay', 'autoplay');
-				// audioElement.play();
-
+                
+                try{
+				 var audioElement = document.createElement('audio');
+				 audioElement.setAttribute('src', './sons/audios/'+ sorteado.apelido +'.mp3');
+				 audioElement.setAttribute('autoplay', 'autoplay');
+				 audioElement.play();
+                } catch(e){}
+                
 
 			}, time)
 
-			time = time + 2500;
+			time = time + 3000;
 		});
 
 
@@ -260,7 +262,10 @@ $(document).ready(function () {
                     
         
         
+$('.form-control').on('keydown',function(e){
         
+    atualizarTabela();
+});
         
         
         
