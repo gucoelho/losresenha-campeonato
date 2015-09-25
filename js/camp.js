@@ -12,7 +12,7 @@ jogadores.push(new Jogador(10, 'Lucas', 'Alvarenga', 'Alva'));
 jogadores.push(new Jogador(11, 'William', 'Figueredo', 'Bahia'));
 //jogadores.push(new Jogador(12, 'Vinicius', 'Freihat', 'Frei'));
 jogadores.push(new Jogador(13, 'José', 'Marcelo', 'Zé'));
-jogadores.push(new Jogador(14, 'Rafael', 'Peron', 'Cacau'));
+//jogadores.push(new Jogador(14, 'Rafael', 'Peron', 'Cacau'));
 //jogadores.push(new Jogador(15, 'Matheus', 'Carvalho', 'Salva'));
 jogadores.push(new Jogador(16, 'Matheus', 'Macieira', 'Pulga'));
 
@@ -178,12 +178,16 @@ $(document).ready(function () {
             var sorteado = getJogadorById($(this).attr('sorteado'));
 
 			setTimeout(function () {
-				cardTag.flip(true);
+
                 
                 try{
 				 var audioElement = document.createElement('audio');
 				 audioElement.setAttribute('src', './sons/audios/'+ sorteado.apelido +'.mp3');
 				 audioElement.setAttribute('autoplay', 'autoplay');
+                    
+                $(this).flip({speed: (audioElement.duration * 1000)});
+				cardTag.flip(true);
+                    
 				 audioElement.play();
                 } catch(e){}
                 
@@ -193,10 +197,6 @@ $(document).ready(function () {
 			time = time + 3000;
 		});
 
-
-		if (flagSorteio) {
-
-		}
 
 	});
 
@@ -240,7 +240,8 @@ $(document).ready(function () {
         
         
         
-        
+        $('section#sJogos').empty();
+
             for(i=0;i<listaJogos.length;i++){
 					      
 	            var time1 = listaJogos[i].time1.time.nome;
@@ -250,7 +251,7 @@ $(document).ready(function () {
 	        
                 
                 
-                $().prepend();
+$('section#sJogos').append(tagJogo(listaJogos[i]));
                 
                 
                 
@@ -260,13 +261,36 @@ $(document).ready(function () {
 
 				}
                     
-        
+        console.log(listaJogos.length)
         
 $('.form-control').on('keydown',function(e){
         
     atualizarTabela();
 });
         
+$('.form-control').keydown(function(e){
+// Allow: backspace, delete, tab, escape, enter and .
+    if(e.keyCode == 13){
+        $(this).closest('.jogo').toggleClass('jogo-ok');  
+                
+        
+        
+    }
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl+A, Command+A
+            (e.keyCode == 65 && ( e.ctrlKey === true || e.metaKey === true ) ) || 
+             // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    
+    
+});        
         
         
 atualizarTabela();
@@ -311,7 +335,7 @@ function compareVitorias(a, b) {
 function atualizarTabela(){
     var table = document.createElement("TABLE");
    participantes.sort(comparePontos);
-    
+
     //var header = table.createTHead();
         for(i=0;i<participantes.length;i++){
         var row = table.insertRow(i);
@@ -319,8 +343,8 @@ function atualizarTabela(){
         for(j=0;j<10;j++){
             var cell = row.insertCell(j);
             switch(j){
-                case 0:  cell.innerHTML = participantes[i].jogador.apelido; break;
-                case 1:  cell.innerHTML = participantes[i].time.nome; break;
+                case 0:  cell.innerHTML = participantes[i].jogador.nomecompleto; break;
+                case 1:  cell.innerHTML = '<img height="50" width="50" src="./img/escudos/'+participantes[i].time.sigla+'.png">'; break;
                 case 2:  cell.innerHTML = participantes[i].jogos; break;
                 case 3:  cell.innerHTML = participantes[i].pontos; break;
                 case 4:  cell.innerHTML = participantes[i].vitorias; break;
@@ -357,8 +381,9 @@ function atualizarTabela(){
     cell = row.insertCell(9);
     cell.innerHTML = 'GC';
 
-    $('#sCampeonato').empty();
-    $('#sCampeonato').append(table);
+    $('#sTabela').empty();
+    $('#sTabela').append(table);
+    $('table').addClass('table');
 }       
 
         

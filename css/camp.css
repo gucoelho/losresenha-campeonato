@@ -289,6 +289,7 @@ h1 {
     /*overflow: hidden;*/
     min-width: 300px;
     height: 70px;
+    margin: 2px;
 }
 
 .time1{
@@ -336,4 +337,8 @@ display: inline-block;
     height: 20px;
     width: auto;
     display: block;
+}
+
+.jogo-ok {
+    background-color: green;
 }

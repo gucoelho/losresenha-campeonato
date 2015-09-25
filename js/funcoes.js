@@ -114,3 +114,8 @@ function tagPlayer(jogador) {
 function tagSorteado(sorteio) {
 	return '<div class="card" sorteado='+sorteio.jogador.id+'><div class="sorteado"><div class="front"><img height="150"src="img/UEFA_Champions_League_logo_2.png"><p>RESENHA LEAGUE</p></div><div class="back"> <div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/' + sorteio.time.sigla + '.png"><img class="imgJogador" src="./img/fotos/nobg/' + sorteio.jogador.apelido + '.png"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid ' + sorteio.time.cor1 + ';border-top: 300px solid ' + sorteio.time.cor2 + ';"></div></div><div class="divTextSort"><p>' + sorteio.jogador.nome + '</p><p>' + sorteio.time.nome + '</p></div></div></div></div>';
 }
+
+
+function tagJogo(jogo) {
+	return '<div class="jogo"><div class="time1"><input class="form-control" type="text" maxlength="2"><img src="./img/escudos/'+jogo.time1.time.sigla+'.png"><div class="jgTxt"><p>'+jogo.time1.jogador.apelido+'</p><p>'+jogo.time1.time.nome+'</p></div></div> x <div class="time2"><div class="jgTxt"><p>'+jogo.time2.jogador.apelido+'</p><p>'+jogo.time1.time.nome+'</p></div><img src="./img/escudos/'+jogo.time2.time.sigla+'.png"><input class="form-control" type="text" maxlength="2"></div></div>';
+}
