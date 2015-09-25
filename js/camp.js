@@ -9,7 +9,7 @@ jogadores.push(new Jogador(7, 'Dominick', 'Lucio', 'Dom'));
 jogadores.push(new Jogador(8, 'Pedro', 'Oliveira', 'Pedro'));
 jogadores.push(new Jogador(9, 'Rafael', 'Vieira', 'Rafa'));
 jogadores.push(new Jogador(10, 'Lucas', 'Alvarenga', 'Alva'));
-jogadores.push(new Jogador(11, 'William', 'Figueredo', 'Bahia'));
+//jogadores.push(new Jogador(11, 'William', 'Figueredo', 'Bahia'));
 //jogadores.push(new Jogador(12, 'Vinicius', 'Freihat', 'Frei'));
 jogadores.push(new Jogador(13, 'José', 'Marcelo', 'Zé'));
 //jogadores.push(new Jogador(14, 'Rafael', 'Peron', 'Cacau'));
@@ -203,15 +203,17 @@ $(document).ready(function () {
 
 	$('#btn-jogos').click(function(){
 	      listaJogos = [];
+		var count = 0; 
 	      var listaJogadoresJaDefinidos = [];
 	            for(i=0;i<participantes.length;i++){
 	                for(j=0;j<participantes.length;j++){
 	                    if(participantes[i] != participantes[j] && !containsSorteio(participantes[j], listaJogadoresJaDefinidos)){
                             if((Math.random()*10) > 5){ 
-	                        listaJogos.push(new Jogo(participantes[i],participantes[j]));
+	                        listaJogos.push(new Jogo(count, participantes[i],participantes[j]));
                             } else {
-	                        listaJogos.push(new Jogo(participantes[j],participantes[i]));
+	                        listaJogos.push(new Jogo(count, participantes[j],participantes[i]));
                             }
+							count ++;
 	                    }
 	                }
 	                listaJogadoresJaDefinidos.push(participantes[i]);
@@ -262,18 +264,25 @@ $('section#sJogos').append(tagJogo(listaJogos[i]));
 				}
                     
         console.log(listaJogos.length)
-        
-$('.form-control').on('keydown',function(e){
-        
-    atualizarTabela();
-});
+
         
 $('.form-control').keydown(function(e){
 // Allow: backspace, delete, tab, escape, enter and .
     if(e.keyCode == 13){
-        $(this).closest('.jogo').toggleClass('jogo-ok');  
+		var parent = $(this).closest('.jogo');
+        parent.toggleClass('jogo-ok');  
                 
-        
+        if(parent.hasClass('jogo-ok')){
+			var jogo = getJogoById(parent.attr('idJogo'),listaJogos);
+			var index = listaJogos.indexOf(jogo);
+			jogo.gols1 = parent.closest('.gols1').val();
+			jogo.gols2 = parent.closest('.gols2').val();
+			jogo.ocorreu = true;
+			listaJogos[index] = jogo;
+			
+			atualizaParticipantes(listaJogos,participantes);
+			atualizarTabela();
+		}
         
     }
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
@@ -288,8 +297,9 @@ $('.form-control').keydown(function(e){
         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
             e.preventDefault();
         }
-    
-    
+	
+        atualizarTabela();
+
 });        
         
         
