@@ -225,6 +225,7 @@ h1 {
 
 
 .divTextSort{
+
     position: relative;
     height: 70px;
     overflow: hidden;
@@ -236,7 +237,9 @@ h1 {
 	border-radius: 0 0 10px 10px;
 
 }
-
+.divTextSort p {
+    padding-top: 5px;
+}
 /*.divTextSort > :first-child { 
     background-color: #09206a;
     padding: 2px;
@@ -289,7 +292,7 @@ h1 {
     /*overflow: hidden;*/
     min-width: 300px;
     height: 70px;
-    margin: 2px;
+    margin: 2px 50px;
 }
 
 .time1{
@@ -340,12 +343,23 @@ display: inline-block;
 }
 
 .jogo-ok {
-    background-color: green;
+    background-color: white;
+    border: solid 1px #09206a;
+    color: #09206a;
+    font-weight: bold;
+
+}
+
+#sTabela {
+
+    margin: 10px;
 }
 
 .table {
+    border-radius: 5px;
    background-color : white;
    color : #09206a;
    font-size : 20px;
+    font-weight: bold;
 
 }

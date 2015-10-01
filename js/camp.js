@@ -33,8 +33,10 @@ times.push(new Time(8, 'Chelsea', 'CHE', ligas[4], '#034694', '#ffffff'));
 times.push(new Time(9, 'Manchester United', 'MAU', ligas[4], '#ffff00', '#ff0000'));
 times.push(new Time(10, 'Manchester City', 'MAC', ligas[4], '#00b4db', '#ffffff'));
 times.push(new Time(11, 'Borussia Bortmund', 'BOR', ligas[1], '#f8dd37', '#000000'));
-
-
+times.push(new Time(12, 'Milan', 'MIL', ligas[3], '#f70b00', '#000000'));
+times.push(new Time(13, 'Inter de Milão', 'INT', ligas[3], '#283571', '#000000'));
+times.push(new Time(14, 'Liverpool', 'LIV', ligas[4], '#ff0000', '#ffffff'));
+//times.push(new Time(15, 'Arsenal', 'ARS', ligas[4], '#ffffff', '#ff0000'));
 
 $(document).ready(function () {
 
@@ -159,7 +161,7 @@ $(document).ready(function () {
 		}
 
 		$('.card').flip({
-			speed: 900,
+			speed: 1100,
 			trigger: 'manual'
 		});
 
@@ -185,7 +187,7 @@ $(document).ready(function () {
 				 audioElement.setAttribute('src', './sons/audios/'+ sorteado.apelido +'.mp3');
 				 audioElement.setAttribute('autoplay', 'autoplay');
                     
-                $(this).flip({speed: (audioElement.duration * 1000)});
+               // cardTag.flip({speed: (audioElement.duration * 1000), trigger : 'manual'});
 				cardTag.flip(true);
                     
 				 audioElement.play();
@@ -200,7 +202,7 @@ $(document).ready(function () {
 
 	});
 
-
+var qtdJogos;
 	$('#btn-jogos').click(function(){
 	      listaJogos = [];
 		var count = 0; 
@@ -240,8 +242,9 @@ $(document).ready(function () {
 	       listaJogos.sort(compareNumbers); 
             
         
-        
-        
+        var qtdJogos = Math.round(participantes.length/2);
+
+        var contador = 0;
         $('section#sJogos').empty();
 
             for(i=0;i<listaJogos.length;i++){
@@ -253,9 +256,9 @@ $(document).ready(function () {
 	        
                 
                 
-$('section#sJogos').append(tagJogo(listaJogos[i]));
-                
-                
+                $('section#sJogos').append(tagJogo(listaJogos[i]));
+                    $('section#sJogos').append('<br>');
+
                 
                 
                 
@@ -270,19 +273,31 @@ $('.form-control').keydown(function(e){
 // Allow: backspace, delete, tab, escape, enter and .
     if(e.keyCode == 13){
 		var parent = $(this).closest('.jogo');
-        parent.toggleClass('jogo-ok');  
-                
+        parent.toggleClass('jogo-ok');
+        var jogo = getJogoById(parent.attr('idJogo'),listaJogos);
+        
         if(parent.hasClass('jogo-ok')){
-			var jogo = getJogoById(parent.attr('idJogo'),listaJogos);
 			var index = listaJogos.indexOf(jogo);
-			jogo.gols1 = parent.closest('.gols1').val();
-			jogo.gols2 = parent.closest('.gols2').val();
+			var g1 = parseInt(parent.find('input.form-control.gols1')[0].value);
+            var g2 = parseInt(parent.find('input.form-control.gols2')[0].value);
+            
+            if(g1 == undefined)
+                g1 = 0;
+            if(g2 == undefined)
+                g2 = 0;
+            
+            jogo.gols1 = g1;
+			jogo.gols2 = g2;
 			jogo.ocorreu = true;
 			listaJogos[index] = jogo;
 			
 			atualizaParticipantes(listaJogos,participantes);
 			atualizarTabela();
-		}
+		}else{
+			atualizaParticipantes(listaJogos,participantes);
+            atualizarTabela();
+            jogo.ocorreu = false;
+        }
         
     }
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||

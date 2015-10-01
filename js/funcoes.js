@@ -125,14 +125,14 @@ function getParticipanteByJogador(jogador, participantes){
 
 function atualizaParticipantes(listaJogos,participantes){
 		for (var i = 0; i < participantes.length; i++){
-			participantes[i].vitorias = 0;
-			participantes[i].jogos = 0;
-			participantes[i].pontos = 0;
-			participantes[i].empates = 0;
-			participantes[i].derrotas = 0;
-			participantes[i].GC = 0;
-			participantes[i].GP = 0;
-			participantes[i].SG = 0;
+			participantes[i].vitorias = parseInt(0);
+			participantes[i].jogos = parseInt(0);
+			participantes[i].pontos = parseInt(0);
+			participantes[i].empates = parseInt(0);
+			participantes[i].derrotas = parseInt(0);
+			participantes[i].GC = parseInt(0);
+			participantes[i].GP = parseInt(0);
+			participantes[i].SG = parseInt(0);
 		}	
 	
 	
@@ -151,7 +151,7 @@ function atualizaParticipantes(listaJogos,participantes){
 				
 				participanteVisi.derrotas +=1;
 
-			}if(listaJogos[i].gols1 < listaJogos[i].gols2 ){
+			}else if(listaJogos[i].gols1 < listaJogos[i].gols2 ){
 							
 				
 				participanteVisi.vitorias +=1;
@@ -170,12 +170,12 @@ function atualizaParticipantes(listaJogos,participantes){
 				participanteMand.jogos +=1;
 				participanteVisi.jogos +=1;
 			
-				participanteMand.GP += listaJogos[i].gols1;
-				participanteMand.GC += listaJogos[i].gols2;
+				participanteMand.GP += parseInt(listaJogos[i].gols1);
+				participanteMand.GC += parseInt(listaJogos[i].gols2);
 				participanteMand.SG = participanteMand.GP - participanteMand.GC;
 				
-				participanteVisi.GP += listaJogos[i].gols2;
-				participanteVisi.GC += listaJogos[i].gols1;
+				participanteVisi.GP += parseInt(listaJogos[i].gols2);
+				participanteVisi.GC += parseInt(listaJogos[i].gols1);
 				participanteVisi.SG = participanteVisi.GP - participanteVisi.GC;
 		}
 
@@ -192,6 +192,7 @@ function tagTeam(time) {
 
 function tagPlayer(jogador) {
 	return '<div class="tagJogador" jogador="' + jogador.id + '"><div class="jogImagem"><img src="img/fotos/perfil/' + jogador.apelido + '.jpg"></div><div><b>' + jogador.apelido + '</b></div><div><small>' + jogador.nomecompleto + '</small></div></div>'
+    
 }
 
 function tagSorteado(sorteio) {
@@ -200,5 +201,5 @@ function tagSorteado(sorteio) {
 
 
 function tagJogo(jogo) {
-	return '<div class="jogo" idJogo="'+jogo.id+'"><div class="time1"><input class="form-control gols1" type="text" maxlength="2"><img src="./img/escudos/'+jogo.time1.time.sigla+'.png"><div class="jgTxt"><p>'+jogo.time1.jogador.apelido+'</p><p>'+jogo.time1.time.nome+'</p></div></div> x <div class="time2"><div class="jgTxt"><p>'+jogo.time2.jogador.apelido+'</p><p>'+jogo.time1.time.nome+'</p></div><img src="./img/escudos/'+jogo.time2.time.sigla+'.png"><input class="form-control gols2" type="text" maxlength="2"></div></div>';
+	return '<div class="jogo" idJogo="'+jogo.id+'"><div class="time1"><input class="form-control gols1" type="text" maxlength="2"><img src="./img/escudos/'+jogo.time1.time.sigla+'.png"><div class="jgTxt"><p>'+jogo.time1.jogador.apelido+'</p><p>'+jogo.time1.time.nome+'</p></div></div> x <div class="time2"><div class="jgTxt"><p>'+jogo.time2.jogador.apelido+'</p><p>'+jogo.time2.time.nome+'</p></div><img src="./img/escudos/'+jogo.time2.time.sigla+'.png"><input class="form-control gols2" type="text" maxlength="2"></div></div>';
 }
