@@ -196,7 +196,7 @@ function tagPlayer(jogador) {
 }
 
 function tagSorteado(sorteio) {
-	return '<div class="card" sorteado='+sorteio.jogador.id+'><div class="sorteado"><div class="front"><img height="150"src="img/UEFA_Champions_League_logo_2.png"><p>RESENHA LEAGUE</p></div><div class="back"> <div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/' + sorteio.time.sigla + '.png"><img class="imgJogador" src="./img/fotos/nobg/' + sorteio.jogador.apelido + '.png"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid ' + sorteio.time.cor1 + ';border-top: 300px solid ' + sorteio.time.cor2 + ';"></div></div><div class="divTextSort"><p>' + sorteio.jogador.nome + '</p><p>' + sorteio.time.nome + '</p></div></div></div></div>';
+    return '<div class="card" sorteado='+sorteio.jogador.id+'><div class="sorteado"><div class="front"><img height="150"src="img/UEFA_Champions_League_logo_2.png"><p>RESENHA LEAGUE</p></div><div class="back"> <div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/' + sorteio.time.sigla + '.png"><img class="imgJogador" src="./img/fotos/nobg/' + sorteio.jogador.apelido + '.png"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid ' + sorteio.time.cor1 + ';border-top: 300px solid ' + sorteio.time.cor2 + ';"></div></div><div class="divTextSort"><p>' + sorteio.jogador.nome + '</p><p>' + sorteio.time.nome + '</p></div></div></div></div>';
 }
 
 

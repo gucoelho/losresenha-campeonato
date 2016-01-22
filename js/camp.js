@@ -9,13 +9,15 @@ jogadores.push(new Jogador(7, 'Dominick', 'Lucio', 'Dom'));
 jogadores.push(new Jogador(8, 'Pedro', 'Oliveira', 'Pedro'));
 jogadores.push(new Jogador(9, 'Rafael', 'Vieira', 'Rafa'));
 jogadores.push(new Jogador(10, 'Lucas', 'Alvarenga', 'Alva'));
-//jogadores.push(new Jogador(11, 'William', 'Figueredo', 'Bahia'));
+jogadores.push(new Jogador(11, 'William', 'Figueredo', 'Bahia'));
 //jogadores.push(new Jogador(12, 'Vinicius', 'Freihat', 'Frei'));
 jogadores.push(new Jogador(13, 'José', 'Marcelo', 'Zé'));
-//jogadores.push(new Jogador(14, 'Rafael', 'Peron', 'Cacau'));
-//jogadores.push(new Jogador(15, 'Matheus', 'Carvalho', 'Salva'));
+jogadores.push(new Jogador(14, 'Rafael', 'Peron', 'Cacau'));
+jogadores.push(new Jogador(15, 'Marcel', 'Dias', 'Naruga'));
 jogadores.push(new Jogador(16, 'Matheus', 'Macieira', 'Pulga'));
-
+jogadores.push(new Jogador(17, 'Raphael', 'Brandão', 'Rapha'));
+jogadores.push(new Jogador(18, 'Laercio', 'Maffei', 'Lalau'));
+jogadores.push(new Jogador(19, 'Mateus', 'Itiro', 'Japa'));
 
 
 var ligas = ['Brasil', 'Alemanha', 'Espanha', 'Italia', 'Inglaterra', 'França', 'Portugal'];
@@ -36,7 +38,8 @@ times.push(new Time(11, 'Borussia Bortmund', 'BOR', ligas[1], '#f8dd37', '#00000
 times.push(new Time(12, 'Milan', 'MIL', ligas[3], '#f70b00', '#000000'));
 times.push(new Time(13, 'Inter de Milão', 'INT', ligas[3], '#283571', '#000000'));
 times.push(new Time(14, 'Liverpool', 'LIV', ligas[4], '#ff0000', '#ffffff'));
-//times.push(new Time(15, 'Arsenal', 'ARS', ligas[4], '#ffffff', '#ff0000'));
+times.push(new Time(15, 'Arsenal', 'ARS', ligas[4], '#ffffff', '#ff0000'));
+times.push(new Time(16, 'Napoli', 'NAP', ligas[3], '#009dff', '#ffffff'));
 
 $(document).ready(function () {
 
@@ -122,9 +125,6 @@ $(document).ready(function () {
 				shuffle(sorteioJogadores);
 				participantes.push(new Participante(sorteioTimes[i], sorteioJogadores[i]));
 
-				// console.log(participantes[i].time.nome +'-'+participantes[i].jogador.apelido);
-
-
 				sorteioJogadores.shift(sorteioJogadores[i]);
 				sorteioTimes.shift(sorteioTimes[i]);
 			}
@@ -136,40 +136,23 @@ $(document).ready(function () {
 			}
 
 			for (i = 0; i < sorteioTimes.length; i = i) {
-				//var sort = Math.round(Math.random);
 				shuffle(sorteioTimes);
 				shuffle(sorteioJogadores);
 				participantes.push(new Participante(sorteioTimes[i], sorteioJogadores[i]));
-
-				//console.log(participantes[i].time.nome +'-'+participantes[i].jogador.apelido);
-
 
 				sorteioJogadores.shift(sorteioJogadores[i]);
 				sorteioTimes.shift(sorteioTimes[i]);
 			}
 		}
 
-
-
-
-
 		for (i = 0; i < participantes.length; i++) {
-
-			/* var tag='<div class="card"><div class="sorteado"><div class="front"><img height="150"src="img/UEFA_Champions_League_logo_2.png"><p>RESENHA LEAGUE</p></div><div class="back"> <div class="sorteadoImg"><img class="imgEscudo" src="./img/escudos/medio/'+participantes[i].time.sigla+'.png"><img class="imgJogador" src="./img/fotos/perfil/'+participantes[i].jogador.apelido+'.jpg"><div class="cor1" style="position: absolute;left: 0;top: 0;background-color: red;border-right: 300px solid '+participantes[i].time.cor1+';border-top: 300px solid '+participantes[i].time.cor2+';"></div></div><div class="divTextSort"><p>'+participantes[i].jogador.nome+'</p><p>'+participantes[i].time.nome+'</p></div></div></div></div>';          */
 			$('#sSorteados').prepend(tagSorteado(participantes[i]));
-
 		}
 
 		$('.card').flip({
 			speed: 1100,
 			trigger: 'manual'
 		});
-
-		//  var $cards = $('.card').all;
-
-		// setInterval(function(){
-		//     for(h=0;h<$cards.length;h++){  $cards[h].flip(true); }
-		// } ,100);
 
 		var time = 3000;
 
@@ -181,13 +164,11 @@ $(document).ready(function () {
 
 			setTimeout(function () {
 
-                
                 try{
 				 var audioElement = document.createElement('audio');
 				 audioElement.setAttribute('src', './sons/audios/'+ sorteado.apelido +'.mp3');
 				 audioElement.setAttribute('autoplay', 'autoplay');
                     
-               // cardTag.flip({speed: (audioElement.duration * 1000), trigger : 'manual'});
 				cardTag.flip(true);
                     
 				 audioElement.play();
@@ -202,7 +183,8 @@ $(document).ready(function () {
 
 	});
 
-var qtdJogos;
+	var qtdJogos;
+
 	$('#btn-jogos').click(function(){
 	      listaJogos = [];
 		var count = 0; 
@@ -224,8 +206,7 @@ var qtdJogos;
 	function compareNumbers(a, b) {
 	  return a.rodada - b.rodada;
 	}
-	    
-	    
+	        
 	    var qtdRodada = participantes.length-1;
 	    var rodada = 1;
 	    var count = 1;
@@ -254,14 +235,9 @@ var qtdJogos;
 	            var jogador1 = listaJogos[i].time1.jogador.apelido;
 	            var jogador2 = listaJogos[i].time2.jogador.apelido;
 	        
-                
-                
                 $('section#sJogos').append(tagJogo(listaJogos[i]));
-                    $('section#sJogos').append('<br>');
-
-                
-                
-                
+                $('section#sJogos').append('<br>');
+                          
 					console.log(jogador1 + '\t x\t ' + jogador2 + '\tRODADA:' + listaJogos[i].rodada);
 
 				}
@@ -411,7 +387,6 @@ function atualizarTabela(){
     $('table').addClass('table');
 }       
 
-        
         
         
         
