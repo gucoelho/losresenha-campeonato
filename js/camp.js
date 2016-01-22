@@ -186,22 +186,21 @@ $(document).ready(function () {
 	var qtdJogos;
 
 	$('#btn-jogos').click(function(){
-	      listaJogos = [];
+		
+		
+	    listaJogos = [];
 		var count = 0; 
-	      var listaJogadoresJaDefinidos = [];
-	            for(i=0;i<participantes.length;i++){
-	                for(j=0;j<participantes.length;j++){
-	                    if(participantes[i] != participantes[j] && !containsSorteio(participantes[j], listaJogadoresJaDefinidos)){
-                            if((Math.random()*10) > 5){ 
-	                        listaJogos.push(new Jogo(count, participantes[i],participantes[j]));
-                            } else {
-	                        listaJogos.push(new Jogo(count, participantes[j],participantes[i]));
-                            }
-							count ++;
-	                    }
-	                }
-	                listaJogadoresJaDefinidos.push(participantes[i]);
-	            }
+	    var listaJogadoresJaDefinidos = [];
+		
+		for(i=0;i<participantes.length;i++){
+			for(j=0;j<participantes.length;j++){
+				if(participantes[i] != participantes[j] && !containsSorteio(participantes[j], listaJogadoresJaDefinidos)){
+					listaJogos.push(new Jogo(count, participantes[i],participantes[j]));
+					count ++;
+				}
+			}
+			listaJogadoresJaDefinidos.push(participantes[i]);
+		}
 
 	function compareNumbers(a, b) {
 	  return a.rodada - b.rodada;
@@ -220,12 +219,13 @@ $(document).ready(function () {
 	            } else { rodada++ } 
 	        }
 		
-	       listaJogos.sort(compareNumbers); 
+	       //listaJogos.sort(compareNumbers); 
             
         
         var qtdJogos = Math.round(participantes.length/2);
 
         var contador = 0;
+	
         $('section#sJogos').empty();
 
             for(i=0;i<listaJogos.length;i++){
