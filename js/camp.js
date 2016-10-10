@@ -18,7 +18,7 @@ jogadores.push(new Jogador(16, 'Matheus', 'Macieira', 'Pulga'));
 jogadores.push(new Jogador(17, 'Raphael', 'Brandão', 'Rapha'));
 jogadores.push(new Jogador(18, 'Laercio', 'Maffei', 'Lalau'));
 jogadores.push(new Jogador(19, 'Mateus', 'Itiro', 'Japa'));
-
+jogadores.push(new Jogador(20, 'Matheus', 'Carvalho', 'Salva'));
 
 var ligas = ['Brasil', 'Alemanha', 'Espanha', 'Italia', 'Inglaterra', 'França', 'Portugal'];
 
@@ -34,7 +34,7 @@ times.push(new Time(7, 'Roma', 'ROM', ligas[3], '#f89728', '#b30838'));
 times.push(new Time(8, 'Chelsea', 'CHE', ligas[4], '#034694', '#ffffff'));
 times.push(new Time(9, 'Manchester United', 'MAU', ligas[4], '#ffff00', '#ff0000'));
 times.push(new Time(10, 'Manchester City', 'MAC', ligas[4], '#00b4db', '#ffffff'));
-times.push(new Time(11, 'Borussia Bortmund', 'BOR', ligas[1], '#f8dd37', '#000000'));
+times.push(new Time(11, 'Borussia Dortmund', 'BOR', ligas[1], '#f8dd37', '#000000'));
 times.push(new Time(12, 'Milan', 'MIL', ligas[3], '#f70b00', '#000000'));
 times.push(new Time(13, 'Inter de Milão', 'INT', ligas[3], '#283571', '#000000'));
 times.push(new Time(14, 'Liverpool', 'LIV', ligas[4], '#ff0000', '#ffffff'));
